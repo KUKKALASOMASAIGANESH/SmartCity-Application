@@ -17,6 +17,7 @@ public String deletecustomer(int cid);
 public Admin checkadminlogin(String uname,String pwd);
 
 public long customercount();//count(*)
+public long citiescount();
 public int updatestatus(int cid,boolean status);
 
 public String deletehotel(int id);

@@ -127,11 +127,14 @@ height: 100vh;
         <span class="service-icon">◁</span> Back
     </a>
     <img src="images/smartcity.png" alt="Navbar Image" class="top-image">
-    <a href="citieslist.jsp"><span class="service-icon">🌍</span> Choose Other City</a>
+    <div class="separator"></div>
+     <%@ include file="header.jsp" %>
+    <a href="citieslist?city=${param.city}"><span class="service-icon">🌍</span> Choose Other City</a>
         <div class="separator"></div>
     <a href="home?city=${param.city}">
         <span class="service-icon">🏠</span> Home
     </a>
+
     <div class="separator"></div>
     <a href="about?city=${param.city}">
         <span class="service-icon">ℹ️</span> About the City

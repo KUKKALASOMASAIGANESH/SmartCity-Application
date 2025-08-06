@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=ISO-8859-1" isELIgnored="false"%> 
-<%-- <%@ taglib uri="jakarta.tags.core" prefix="c"%> 
- --%>  <!DOCTYPE html>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%> 
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>My Bookings</title>

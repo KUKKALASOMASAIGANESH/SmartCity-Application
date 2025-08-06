@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ taglib uri="jakarta.tags.core" prefix="c"%>
- --%><!DOCTYPE html>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Home</title>
@@ -106,17 +106,17 @@ img {
 
 	<!-- Video Container -->
 	<c:choose>
-		<c:when test="${cityname == 'hyderabad'}">
+		<c:when test="${cityname == 'Hyderabad'}">
 			<video autoplay loop muted playsinline id="fullscreen-video"
 				style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.00);">
 				<source src="video/hydvideo.mp4" type="video/mp4">
 			</video>
 		</c:when>
 		
-		<c:when test="${cityname == 'mumbai'}">
+		<c:when test="${cityname == 'Yanam'}">
 			<video autoplay loop muted playsinline id="fullscreen-video"
 				style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.00);">
-				<source src="video/mumbaivideo.mp4" type="video/mp4">
+				<source src="video/ynmvideo.mp4" type="video/mp4">
 			</video>
 		</c:when>
 		
@@ -127,6 +127,12 @@ img {
 			</video>
 		</c:when>
 		
+		<c:when test="${cityname == 'Vijayawada'}">
+			<video autoplay loop muted playsinline id="fullscreen-video"
+				style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.00);">
+				<source src="video/vjyvideo.mp4" type="video/mp4">
+			</video>
+		</c:when>
 		
 		
 	</c:choose>

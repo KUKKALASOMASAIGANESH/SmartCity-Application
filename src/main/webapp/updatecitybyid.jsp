@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=ISO-8859-1" isELIgnored="false"%> 
     <%@ page import="com.klef.jfsd.model.City" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
 <html>

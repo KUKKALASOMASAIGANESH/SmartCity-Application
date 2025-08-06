@@ -8,4 +8,5 @@ public interface CityService {
     List<City> viewallcities();
     City viewcitybyid(int id);
     String updatecity(City c);
+	long citiescount();
 }

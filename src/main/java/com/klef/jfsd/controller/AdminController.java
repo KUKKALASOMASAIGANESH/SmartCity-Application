@@ -117,6 +117,8 @@ public class AdminController {
 
 			long customercount = adminService.customercount();
 			mv.addObject("ccount", customercount);
+			long cityCount = cityService.citiescount();
+			mv.addObject("citycount", cityCount);
 
 		} else {
 			mv.setViewName("adminlogin");
@@ -655,10 +657,12 @@ public class AdminController {
 		}
 
 		long customercount = adminService.customercount();
+		long cityCount = cityService.citiescount();
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("adminhome");
 		mv.addObject("ccount", customercount);
+		mv.addObject("citycount", cityCount);
 
 		return mv;
 	}

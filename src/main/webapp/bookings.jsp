@@ -334,6 +334,7 @@ a {
 </div>
 
 <%@ include file="navbar.jsp"%>
+ <div id="google_translate_element"></div>
     <div class="container">
         <div class="signin-signup">
             <form action="inserthotelbooking?city=${cityname}" class="sign-in-form" method="post">
@@ -442,7 +443,7 @@ a {
             </div>
         </div>
     </div>
-    
+    <%@ include file="header.jsp" %>
     
     
     <script>

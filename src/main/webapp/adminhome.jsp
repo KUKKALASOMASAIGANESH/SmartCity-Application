@@ -61,10 +61,16 @@ statistics-container {
 <%@ include file="adminnavbar.jsp" %>
     <br>
     <br>
-<div class="statistics-box" >
-        <h3>Total Customers</h3>
-        <p id="anotherStatCount">${ccount}</p>
-    </div>   
+<div class="statistics-container">
+   <div class="statistics-box">
+      <h2>Total Customers</h2>
+      <p>${ccount}</p>
+   </div>
+   <div class="statistics-box">
+      <h2>Total Cities</h2>
+      <p>${citycount}</p>
+   </div>
+</div>
 </body>
 </html>
 

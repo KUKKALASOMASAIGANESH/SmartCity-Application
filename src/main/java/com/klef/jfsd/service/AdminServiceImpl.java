@@ -172,4 +172,10 @@ public class AdminServiceImpl implements AdminService {
 		return "Query Deleted";
 	}
 
+	@Override
+	public long citiescount() {
+		// TODO Auto-generated method stub
+		return cityRepository.count();
+	}
+
 }

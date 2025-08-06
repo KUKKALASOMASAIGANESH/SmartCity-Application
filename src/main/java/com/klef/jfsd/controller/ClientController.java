@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -113,7 +114,7 @@ public class ClientController {
 	@Scheduled(cron = "0 */2 * * * *", zone = "Asia/Kolkata")
 	public void scheduleEmail() {
 		String msg = "This is an Email Scheduler";
-		String recepient = "2100031868cseh@gmail.com";
+		String recepient = "somasaiganesh.06@gmail.com";
 		emailService.sendEmail(recepient, "EMAIL SCHEDULING CONFIRMATION", "EMAIL SCHEDULING IS SUCCESSFULL");
 		System.out.println("EMAIL SCHEDULE SUCCESS");
 	}
@@ -538,96 +539,110 @@ public class ClientController {
 	}
 
 	@PostMapping("rentalbooking")
-	public ModelAndView rentalbooking(@RequestParam("city") String city,HttpServletRequest request) {
-	
-		
-		ModelAndView mv = new ModelAndView();
-		String msg = null;
+	public ModelAndView rentalbooking(@RequestParam("city") String city, HttpServletRequest request) {
 
-		try {
-			String name = request.getParameter("rental_name");
-			String contact = request.getParameter("rental_contact");
-			String email = request.getParameter("rental_email");
-			String address = request.getParameter("rental_address");
-			String vehicle = request.getParameter("rental_vehicle");
-			String date = request.getParameter("rental_date");
-			String time = request.getParameter("rental_time");
+	    ModelAndView mv = new ModelAndView();
+	    String msg = null;
 
-			RentalBookings rb = new RentalBookings();
-			rb.setName(name);
-			rb.setNumber(contact);
-			rb.setEmail(email);
-			rb.setAddress(address);
-			rb.setVehicle(vehicle);
-			rb.setDate(date);
-			rb.setTime(time);
+	    try {
+	        String name = request.getParameter("rental_name");
+	        String contact = request.getParameter("rental_contact");
+	        String email = request.getParameter("rental_email");
+	        String address = request.getParameter("rental_address");
+	        String vehicle = request.getParameter("rental_vehicle");
+	        String date = request.getParameter("rental_date");
+	        String time = request.getParameter("rental_time");
 
-//			  System.out.println(rb.toString());
+	        RentalBookings rb = new RentalBookings();
+	        rb.setName(name);
+	        rb.setNumber(contact);
+	        rb.setEmail(email);
+	        rb.setAddress(address);
+	        rb.setVehicle(vehicle);
+	        rb.setDate(date);
+	        rb.setTime(time);
 
-			msg = rentalBookingService.addbooking(rb);
-			
-			emailService.sendEmail(rb.getEmail(), "Rental Booking Confirmation",
-				    "Dear User, we are pleased to confirm your reservation for a "+
-				    		rb.getVehicle() + " in " + city +" under the name " + rb.getName() + ". Your booking is scheduled for " +
-				    		rb.getDate() + " at " + rb.getTime() + "."
-				    );
-			
-			System.out.println(msg);
-			mv.setViewName("bookings");
-			mv.addObject("message", msg);
-		} catch (Exception e) {
-			mv.setViewName("mybookings");
-			msg = e.getMessage();
-			mv.addObject("message", msg);
-		}
-		return mv;
-		//return new ModelAndView("redirect:/mybookings");
+	        msg = rentalBookingService.addbooking(rb);
+
+	        emailService.sendEmail(
+	            rb.getEmail(),
+	            "Rental Booking Confirmation",
+	            "Dear User, we are pleased to confirm your reservation for a " +
+	            rb.getVehicle() + " in " + city + " under the name " + rb.getName() +
+	            ". Your booking is scheduled for " + rb.getDate() + " at " + rb.getTime() + "."
+	        );
+
+	        // Redirect to payment page
+	        mv.setViewName("paymentHome"); 
+	        mv.addObject("message", msg);
+	        mv.addObject("bookingType", "rental");
+	        mv.addObject("name", name);
+	        mv.addObject("email", email);
+	        mv.addObject("vehicle", vehicle);
+	        mv.addObject("amount", "500.00"); // Example: pass the amount
+	        // Add any other booking details you need
+
+	    } catch (Exception e) {
+	        mv.setViewName("mybookings");
+	        msg = e.getMessage();
+	        mv.addObject("message", msg);
+	    }
+	    return mv;
 	}
 
 	@PostMapping("inserthotelbooking")
-	public ModelAndView inserthotelbooking(@RequestParam("city") String city,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-		String msg = null;
+	public ModelAndView inserthotelbooking(@RequestParam("city") String city, HttpServletRequest request) {
+	    ModelAndView mv = new ModelAndView();
+	    String msg = null;
 
-		try {
-			String name = request.getParameter("hotel_name");
-			String email = request.getParameter("hotel_email");
-			String hotel = request.getParameter("hotel");
-			String checkindate = request.getParameter("hotel_checkindate");
-			String checkintime = request.getParameter("hotel_checkintime");
-			String checkoutdate = request.getParameter("hotel_checkoutdate");
-			String checkouttime = request.getParameter("hotel_checkouttime");
+	    try {
+	        String name = request.getParameter("hotel_name");
+	        String email = request.getParameter("hotel_email");
+	        String hotel = request.getParameter("hotel");
+	        String checkindate = request.getParameter("hotel_checkindate");
+	        String checkintime = request.getParameter("hotel_checkintime");
+	        String checkoutdate = request.getParameter("hotel_checkoutdate");
+	        String checkouttime = request.getParameter("hotel_checkouttime");
 
-			HotelBookings hb = new HotelBookings();
-			hb.setName(name);
-			hb.setEmail(email);
-			hb.setHotel(hotel);
-			hb.setCheckindate(checkindate);
-			hb.setCheckintime(checkintime);
-			hb.setCheckoutdate(checkoutdate);
-			hb.setCheckouttime(checkouttime);
+	        HotelBookings hb = new HotelBookings();
+	        hb.setName(name);
+	        hb.setEmail(email);
+	        hb.setHotel(hotel);
+	        hb.setCheckindate(checkindate);
+	        hb.setCheckintime(checkintime);
+	        hb.setCheckoutdate(checkoutdate);
+	        hb.setCheckouttime(checkouttime);
 
-			msg = bookingService.addbooking(hb);
-			
-			emailService.sendEmail(hb.getEmail(), "Hotel Booking Confirmation",
-				    "Dear User, we are delighted to confirm your reservation for the hotel named " +
-				    hb.getHotel() +" in " + city +  ". Your stay is booked from " + hb.getCheckindate() +
-				    " at " + hb.getCheckintime() + " to " + hb.getCheckoutdate() +
-				    " at " + hb.getCheckouttime() + ". "
-				);
+	        msg = bookingService.addbooking(hb);
 
-			//emailService.sendEmail(hb.getEmail(),"Hotel Booking Confirmation","The hotel named "+hb.getHotel(),"has been booked for the date "+hb.getCheckindate()+" at time "+hb.getCheckintime());
-			mv.setViewName("bookings");
-			mv.addObject("message", msg);
+	        emailService.sendEmail(
+	            hb.getEmail(),
+	            "Hotel Booking Confirmation",
+	            "Dear User, we are delighted to confirm your reservation for the hotel named " +
+	            hb.getHotel() + " in " + city + ". Your stay is booked from " + hb.getCheckindate() +
+	            " at " + hb.getCheckintime() + " to " + hb.getCheckoutdate() +
+	            " at " + hb.getCheckouttime() + "."
+	        );
 
-		} catch (Exception e) {
-			//mv.setViewName("mybookings");
-			msg = e.getMessage();
-			mv.addObject("message", msg);
-		}
-		return mv;
-		//return new ModelAndView("redirect:/mybookings");
+	        // Redirect to payment page
+	        mv.setViewName("paymentHome");
+	        mv.addObject("message", msg);
+	        mv.addObject("bookingType", "hotel");
+	        mv.addObject("name", name);
+	        mv.addObject("email", email);
+	        mv.addObject("hotel", hotel);
+	        mv.addObject("checkin", checkindate + " " + checkintime);
+	        mv.addObject("checkout", checkoutdate + " " + checkouttime);
+	        mv.addObject("amount", "2000.00"); // Example: pass the amount
+
+	    } catch (Exception e) {
+	        msg = e.getMessage();
+	        mv.setViewName("mybookings");
+	        mv.addObject("message", msg);
+	    }
+	    return mv;
 	}
+
 
 	@GetMapping("allbookings")
 	public ModelAndView viewallhotelbookings(HttpServletRequest request) {
@@ -673,29 +688,41 @@ public class ClientController {
 		return mv;
 	}
 
+
+
+
 	@PostMapping("contact")
-	public ModelAndView contactusbackend(@RequestParam("city") String city, HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-		String msg = null;
-		try {
-			String name = request.getParameter("name");
-			String email = request.getParameter("email");
-			String comment = request.getParameter("comment");
+	public ModelAndView contactusbackend(HttpServletRequest request) {
+	    ModelAndView mv = new ModelAndView();
+	    String msg;
 
-			Contactus cu = new Contactus();
-			cu.setName(name);
-			cu.setEmail(email);
-			cu.setComment(comment);
+	    try {
+	        String name = request.getParameter("name");
+	        String email = request.getParameter("email");
+	        String comment = request.getParameter("comment");
+	        String city = request.getParameter("city"); // fetch manually
 
-			msg = contactService.insert(cu);
-			mv.setViewName("contactus");
-			mv.addObject("message", msg);
-		} catch (Exception e) {
-			msg = e.getMessage();
-			mv.setViewName("contactus");
-			mv.addObject("message", msg);
-		}
-		return mv;
+	        Contactus cu = new Contactus();
+	        cu.setName(name);
+	        cu.setEmail(email);
+	        cu.setComment(comment);
+
+	        msg = contactService.insert(cu);
+	        mv.setViewName("contactus");
+	        mv.addObject("message", msg);
+
+	        String subject = "New Contact Message from: " + name;
+	        String content = "City: " + city + "\nName: " + name + "\nEmail: " + email + "\nComment: " + comment;
+
+	        emailService.sendEmail("somasaiganesh.05@gmail.com", subject, content);
+
+	    } catch (Exception e) {
+	        msg = e.getMessage();
+	        mv.setViewName("contactus");
+	        mv.addObject("message", msg);
+	    }
+
+	    return mv;
 	}
 
 	@PostMapping("contacthome")
@@ -838,5 +865,8 @@ public class ClientController {
 		// Redirect to the login page
 		return "redirect:/login";
 	}
+	
+
+
 
 }

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" isELIgnored="false"%>
-<%-- <%@ taglib uri="jakarta.tags.core" prefix="c"%>
- --%>
+<%@ taglib uri="jakarta.tags.core" prefix="c"%>
+
 <html>
 <head>
     <link type="text/css" rel="stylesheet" href="css/style.css">
@@ -97,7 +97,7 @@
 <header>
         <h1>Delete Restaurant</h1>
     </header>
-    <div class="container">
+    <div style="overflow-x: auto; width: 100%;">
         <table>
             <tr>
                 <th>ID</th>

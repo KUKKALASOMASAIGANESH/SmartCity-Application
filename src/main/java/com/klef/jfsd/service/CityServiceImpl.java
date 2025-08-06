@@ -42,6 +42,12 @@ public class CityServiceImpl implements CityService
 		cityRepository.save(city);
 		return "City details updated Successfully";
 	}
+
+	@Override
+	public long citiescount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 

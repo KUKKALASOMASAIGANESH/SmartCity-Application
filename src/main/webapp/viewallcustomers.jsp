@@ -1,9 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%-- <%@ taglib uri="jakarta.tags.core" prefix="c"%>
  --%>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="css/style.css">
+<link type="text/css" rel="stylesheet" href="css/style.css">
 
     <style>
        
@@ -37,34 +38,54 @@
 <body>
 
     <%@ include file="adminnavbar.jsp" %>
- <header>
-        <h1>Customer Details</h1>
-    </header>
-    <div class="container">
-      
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>UserName</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>DOB</th>
-                <th>Address</th>
-            </tr>
-
-            <c:forEach items="${customerdata}" var="c">
-                <tr>
-                    <td><c:out value="${c.id}" /></td>
-                    <td><c:out value="${c.name}" /></td>
-                    <td><c:out value="${c.username}" /></td>
-                    <td><c:out value="${c.email}" /></td>
-                    <td><c:out value="${c.gender}" /></td>
-                    <td><c:out value="${c.dob}" /></td>
-                    <td><c:out value="${c.address}" /></td>
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+<html>
+<head>
+    <title>All Customers</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h2>All Customers</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Address</th>
+        <th>Active</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="c" items="${customerdata}">
+        <tr>
+            <td>${c.id}</td>
+            <td>${c.name}</td>
+            <td>${c.username}</td>
+            <td>${c.email}</td>
+            <td>${c.contactno}</td>
+            <td>${c.gender}</td>
+            <td>${c.dob}</td>
+            <td>${c.address}</td>
+            <td>${c.active}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 </body>
 </html>
